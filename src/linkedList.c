@@ -22,7 +22,7 @@ typedef struct _linkedList
 /***
  * @brief criação da 'cabeça do nó' e setando o begin como null
  * @return retorna uma lista encadeada
- * @author Davi fernandes
+ * @author davi fernandes
 */
 LinkedList *LinkedList_create(){
 
@@ -32,5 +32,21 @@ LinkedList *LinkedList_create(){
 
     return linkedList;
 
+}
+
+
+/**
+ * @brief criação do nó em si
+ * @return retorna um nó
+ * @author davi fernandes
+*/
+Node *Node_create(int val){
+
+    Node *node = (Node*) calloc(1, sizeof(Node));
+
+    node->val = val;
+    node->next = NULL;
+
+    return node;
 }
 
