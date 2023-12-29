@@ -21,3 +21,8 @@ $(OBJ)/%.o: $(SRC)/%.c $(INCLUDE)/%.h
 
 $(BIN)/%: $(APPS)/%.c
 	gcc $(FLAGS) $< $(LIBS) -I $(INCLUDE) -o $@
+
+
+
+clean:
+	rm -rf $(BIN)/* $(LIB)/* $(OBJ)/*
