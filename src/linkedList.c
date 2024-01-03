@@ -97,6 +97,36 @@ void add_first(LinkedList *linkedlist, int val){
 
 
 /***
+ * @brief funcao criada para adicionar um elemento ao final da lista encadeada simples
+ * primeiro se verifica se o começo da lista é vazio(null), caso for, se cria o elemento na lista
+ * (como a lista está vazio, o começo é o final(kkk))
+ * 
+ * @brief caso a lista ja contenha um ou mais elementos, se cria um WHILE para percorrer
+ * todos os elementos da lista, ate chegar no ultimo(quando estiver apontando para o nulo), quando isso 
+ * acontecer, vou pegar o node que estava na lista apontando para o null e aponta-lo para o noov node, que  agora
+ * será o ultimo
+*/
+void add_last(LinkedList *linkedList, int val){
+
+    if(linkedList->begin == NULL){
+        Node *nodeC = Node_create(val);
+        linkedList->begin = nodeC;
+    }else{
+
+        Node *nodeS = Node_create(val);
+        Node *node = linkedList->begin;
+
+        while(node->next != NULL){
+            node->next;
+        }
+
+        node->next = nodeS;
+
+    }
+}
+
+ 
+/***
  * @brief printando os elementos da lista, um a um, primeiro criamos um no apontando para o primeiro 
  * item da lista, apos isso, fazemos um while para, quanto o node não apontar para nulo, printamos na tela o valor
  * que o node aponta atualmente e depois, apontamos o node para o proximo elemento da lista.
@@ -111,6 +141,7 @@ void LinkedList_print(const LinkedList *list){
          printf("%d\n", node->val);
          node =node->next;
     }
+
 
 
 }
