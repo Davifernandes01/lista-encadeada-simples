@@ -96,4 +96,24 @@ void add_first(LinkedList *linkedlist, int val){
 };
 
 
+/***
+ * @brief printando os elementos da lista, um a um, primeiro criamos um no apontando para o primeiro 
+ * item da lista, apos isso, fazemos um while para, quanto o node não apontar para nulo, printamos na tela o valor
+ * que o node aponta atualmente e depois, apontamos o node para o proximo elemento da lista.
+ * @param list a lista encadeada criada
+ * 
+*/
+void LinkedList_print(const LinkedList *list){
+
+    Node *node = list->begin;
+
+    while(node != NULL){
+         printf("%d\n", node->val);
+         node =node->next;
+    }
+
+
+}
+
+
 
