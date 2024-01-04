@@ -1,6 +1,7 @@
 #include "linkedList.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 
 
@@ -22,7 +23,19 @@ typedef struct _node
 typedef struct _linkedList
 {
   Node *begin;
-} LinkedList;
+  Node *end
+    } LinkedList;
+
+
+/**
+ * @brief funcao que retorna se a lista esta vazio ou não
+ * @param linkedlist a lista em si
+ * @author davi fernandes
+*/
+bool Is_empty_linkedlist(const LinkedList *linkedlist){
+
+    return (linkedlist->begin == NULL && linkedlist->end ==NULL);
+}
 
 
 /******************funções do nó em sim****************************************/
@@ -53,6 +66,7 @@ LinkedList *LinkedList_create(){
     LinkedList *linkedList = (LinkedList*) calloc(1, sizeof(LinkedList));
 
     linkedList->begin = NULL;
+    linkedList->end = NULL;
 
     return linkedList;
 
@@ -79,7 +93,7 @@ LinkedList *LinkedList_create(){
 
  *porem para fim ditaticos, deixei ele mais legivel
 */
-void add_first(LinkedList *linkedlist, int val){
+/*void add_first(LinkedList *linkedlist, int val){
 
    
     if(linkedlist->begin == NULL){
@@ -93,7 +107,22 @@ void add_first(LinkedList *linkedlist, int val){
         linkedlist->begin = node;
     }
 
-};
+};*/
+
+void add_first(LinkedList *linkedlist, int val){
+
+    Node *node = Node_create(val);
+    node->next = linkedlist->begin;
+    
+         
+    if(Is_empty_linkedlist(linkedlist)){
+
+        linkedlist->end = node;
+
+    }
+
+    linkedlist->begin = node;
+}
 
 
 /***
@@ -105,26 +134,68 @@ void add_first(LinkedList *linkedlist, int val){
  * todos os elementos da lista, ate chegar no ultimo(quando estiver apontando para o nulo), quando isso 
  * acontecer, vou pegar o node que estava na lista apontando para o null e aponta-lo para o noov node, que  agora
  * será o ultimo
+ * 
+ * @param linkedlist a lista em sim
+ * @param val o valor que queremos adicionar na lista
+ * 
+ * @attention dessa forma é feita a inserção, porem com muito elementos na lista ela se
+ * torna lento, ficando ineficiente em casos com muitos elementos
+ * 
+ * @author davi fernandes
 */
-void add_last(LinkedList *linkedList, int val){
+void add_last_slow(LinkedList *linkedList, int val){
 
-    if(linkedList->begin == NULL){
-        Node *nodeC = Node_create(val);
+    Node *nodeC = Node_create(val);
+    if(Is_empty_linkedlist(linkedList)){
+        
         linkedList->begin = nodeC;
     }else{
 
-        Node *nodeS = Node_create(val);
         Node *node = linkedList->begin;
-
         while(node->next != NULL){
-            node->next;
+            
+            node = node->next;
         }
 
-        node->next = nodeS;
+        node->next = nodeC;
 
     }
 }
 
+
+/****
+ * @brief funcao para adicionar um elemento no final da lista encadeada, porem dessa vez, com mais perfomace
+ * adicionei um ponteiro 'end' na struct da lista, aonde o mesmo aponta para o ultimo elemento(node) da lista
+ * 
+ * no if: verificamos se o começo da lista esta vazia(se o begin esta apontando para nulo), se estiver
+ * tento o 'begin' e tanto o 'end' apontam para o elemento adicionado (um elemento na lista apenas e tanto 
+ * o começo tanto o fim dela)
+ * 
+ * no else: caso a lista esteja com elementos, pegaremos o ultimo elemento da lista e usando o ponteiro
+ * desse elemento, apontaremos para o novo node da lista, apos isso pegaremos o ponteiros 'end' da nossa
+ * lista encadeada e apontaremos ele para o novo ultimo elemento da lista
+ * 
+ * @param linkedlist a lista em sim
+ * @param val o valor que queremos adicionar na lista
+ * 
+ * @author davi fernandes
+*/
+
+void add_last(LinkedList *linkedList, int val){
+
+    Node *node = Node_create(val);
+
+    if(Is_empty_linkedlist(linkedList)){
+
+        linkedList->begin = node;
+        linkedList->end = node;
+    }else{
+
+        linkedList->end->next = node;
+        linkedList->end = linkedList->end->next;
+    }
+
+}
  
 /***
  * @brief printando os elementos da lista, um a um, primeiro criamos um no apontando para o primeiro 
