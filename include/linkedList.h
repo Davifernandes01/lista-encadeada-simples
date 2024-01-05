@@ -13,6 +13,9 @@ void add_last_slow(LinkedList *linkedList, int val);
 void add_last(LinkedList *LinkedList, int val);
 void LinkedList_print(const LinkedList *list);
 bool Is_empty_linkedlist(const LinkedList *linkedlist);
+void linkedList_remove(LinkedList *linkedlist, int val);
+
+
 
 /**funcoes do nó*/
 Node  *Node_create(int val);

@@ -213,9 +213,36 @@ void LinkedList_print(const LinkedList *list){
          node =node->next;
     }
 
-
-
 }
 
+/**
+ * @brief funcao para remover os elementos de uma lista encadeada
+ * primeira parte dela:
+ *  vendo se o valor que quero remover, esta no começo da lista, se estiver, facço um ponteiro
+ * auxiliar para apontar para o primeiro elemento(elemento que quero remover), apos isso, faço com que o ponteiro 'begin'
+ * que representa o começo da lista, aponte para o proximo elemento, logo em seguida removo o 'ex' primeiro elemento da lista
+ * fazendo dessa forma, ao apagar o primeiro elemento da lista, não perco a referencia dos demais elementos da lista
+ * 
+ * segunda parte:
+ * 
+ * 
+ * 
+ * @param linkedlist, a lisat em si
+ * @param val valor que quero remover
+ * @author davi fernandes
+*/
+void linkedList_remove(LinkedList *linkedlist, int val){
 
+        if(!Is_empty_linkedlist(linkedlist)){
+
+            if(linkedlist->begin->val == val){
+
+                Node *node = linkedlist->begin;
+                linkedlist->begin = linkedlist->begin->next;
+                free(node);
+                
+            }
+        }
+
+}
 
