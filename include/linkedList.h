@@ -16,7 +16,6 @@ bool Is_empty_linkedlist(const LinkedList *linkedlist);
 void linkedList_remove(LinkedList *linkedlist, int val);
 
 
-
 /**funcoes do nó*/
 Node  *Node_create(int val);
 

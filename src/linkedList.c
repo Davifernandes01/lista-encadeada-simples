@@ -222,9 +222,20 @@ void LinkedList_print(const LinkedList *list){
  * auxiliar para apontar para o primeiro elemento(elemento que quero remover), apos isso, faço com que o ponteiro 'begin'
  * que representa o começo da lista, aponte para o proximo elemento, logo em seguida removo o 'ex' primeiro elemento da lista
  * fazendo dessa forma, ao apagar o primeiro elemento da lista, não perco a referencia dos demais elementos da lista
+ *  
+ * caso o valor do node esteja no meio da lista:
  * 
- * segunda parte:
+ * no else criamos duas referencias para os nodes uma para o começo da lista(pos) e o outro para o proximo elemento da lista(previous)
+ * no while: caso a lista não seja nula e que o valor do node não seja o mesmo passado na função, avançamos os ponteiros, assim percorremos
+ * a lista ate o final (caso o ponteiro seja nulo, mostra que chegamos ao final da lista).
+ * se o valor do node(pos) é o mesmo passado na função, atualizamos o 'previus' para o proximo elemento da lista que o pos aponta, assim
+ * não perderemos a referencia para o elemento que vem depois do pos, apos isso removemos o pos da lista
  * 
+ * caso o valor do node esteja no final da lista:
+ * 
+ * para saber se o valor passado na funcao esta no final da lista, vemos se o atributo 'next' do node 'pos' esta apontando para nulo, se estiver
+ * sabemos que esta no final porque ele nao esta apontando para nenhum elemento, apos fazer essa verificação, atualizamos o atributo
+ * 'end' da nossa lista para apontar para o elemento anterios ao do 'pos', apos fazer isso, removemos o 'pos'
  * 
  * 
  * @param linkedlist, a lisat em si
@@ -233,16 +244,45 @@ void LinkedList_print(const LinkedList *list){
 */
 void linkedList_remove(LinkedList *linkedlist, int val){
 
-        if(!Is_empty_linkedlist(linkedlist)){
+        if(!Is_empty_linkedlist(linkedlist))
+        {
 
-            if(linkedlist->begin->val == val){
+            if(linkedlist->begin->val == val)
+            {
 
                 Node *node = linkedlist->begin;
+
+                if(linkedlist->begin == linkedlist->end)
+                {
+                    linkedlist->end = NULL;
+                }
                 linkedlist->begin = linkedlist->begin->next;
                 free(node);
                 
-            }
-        }
+            }else
+                {
+                    Node *previous = linkedlist->begin;
+                    Node *pos = linkedlist->begin->next;
 
+                    while(pos != NULL && pos->val != val)
+                    {
+                        previous = previous->next;
+                        pos = pos->next;
+                    }
+
+                    if(pos != NULL){
+
+                        previous->next = pos->next;
+
+                        if(pos->next == NULL){
+                            linkedlist->end = previous;
+                        }
+
+                        free(pos);
+
+                    }   
+                }
+        }
+        
 }
 

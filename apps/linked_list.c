@@ -1,4 +1,6 @@
 #include "linkedList.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 
  
@@ -12,15 +14,25 @@ int main(){
     // add_first(list, 45);
 
    
-    add_last(list,459);
-    add_last(list, 50);
-    add_last(list, 67);
-    add_last(list, 675);
+    add_last(list,10);
+    add_last(list, 2);
+    add_last(list, 4);
+    add_last(list, 5);
+    add_last(list, 7);
 
     LinkedList_print(list);
+    puts("");
 
-    linkedList_remove(list,459);
 
+    linkedList_remove(list,10);
+    LinkedList_print(list);
+     puts("");
+
+   linkedList_remove(list,4);
+    LinkedList_print(list);
+
+    puts("");
+    linkedList_remove(list,7);
     LinkedList_print(list);
 
 
