@@ -15,6 +15,8 @@ void LinkedList_print(const LinkedList *list);
 bool Is_empty_linkedlist(const LinkedList *linkedlist);
 void linkedList_remove(LinkedList *linkedlist, int val);
 void linkedList_removeV2(LinkedList *linkedList, int val);
+void linkedList_removeAll(LinkedList *linkedlist, int val);
+void linkedList_destroy(LinkedList **linkedlist);
 
 
 /**funcoes do nó*/

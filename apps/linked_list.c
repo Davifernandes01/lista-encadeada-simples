@@ -17,23 +17,17 @@ int main(){
     add_last(list,10);
     add_last(list, 2);
     add_last(list, 4);
-    add_last(list, 5);
+    add_last(list, 10);
+    add_last(list, 7);
+    add_last(list, 10);
+    add_last(list,50);
     add_last(list, 7);
 
     LinkedList_print(list);
     puts("");
 
-
-    linkedList_removeV2(list,10);
-    LinkedList_print(list);
-     puts("");
-
-   linkedList_removeV2(list,4);
-    LinkedList_print(list);
-
-    puts("");
-    linkedList_removeV2(list,7);
-    LinkedList_print(list);
+  linkedList_destroy(&list);
+  
 
 
     return 0;

@@ -196,6 +196,38 @@ void add_last(LinkedList *linkedList, int val){
     }
 
 }
+
+
+/**
+ * 
+ * @brief funcao criada para destruir a lista encadeada, junto com seus nodes
+ * primeiro se cria os nodes auxilizares, 'pos' e 'previous', apos isso faço um while para percorrer
+ * todos os nodes da lista, enquanto estiver no while, o 'previous' passará a valor o valor do 'pos' e o 'pos', valerá o seu proximo
+ * valor, no final do while, desalocamos o 'previous', apagando o valor contido nele, isso, enquanto a lista nao estiver nula
+ * quando estiver, quer dizer que a lista esta vazio, entao desalocamos a lista em si.
+ * 
+ * @param linkdlist, referencia da lista que criamos
+ * @author davi fernandes
+*/
+void linkedList_destroy(LinkedList **linkedList){
+
+    LinkedList *linkedlist = *linkedList;
+
+    Node *pos = linkedlist->begin;
+    Node *previous = NULL;
+
+    while (pos != NULL)
+    {
+        previous = pos;
+        pos = pos->next;
+
+        free(previous);
+
+    }
+
+    free(linkedlist);
+    *linkedList = NULL;
+}
  
 /***
  * @brief printando os elementos da lista, um a um, primeiro criamos um no apontando para o primeiro 
@@ -286,7 +318,6 @@ void linkedList_remove(LinkedList *linkedlist, int val){
         
 }
 
-
 /***
  * 
  * @brief faz a mesma coisa que a função anterios, remove os elementos da lista, porem aqui,
@@ -344,3 +375,39 @@ void linkedList_removeV2(LinkedList *linkedlist, int val){
     }
 }
 
+
+/**
+ * @attention AINDA NAO FUNCIONAAAAAAAAAAAAAA
+*/
+void linkedList_removeAll(LinkedList *linkedlist, int val){
+
+    if(!Is_empty_linkedlist(linkedlist)){
+
+        Node *previous = NULL;
+        Node *pos = linkedlist->begin;
+
+        while(pos != NULL){
+
+            if(pos->val == val){
+
+                if(linkedlist->begin == pos){
+                    linkedlist->begin = pos->next;
+                }
+
+                if(linkedlist->end == pos){
+                    linkedlist->end = previous;
+                }else{
+
+                    previous->next = pos->next;
+                }
+
+                free(pos);
+            
+            }else{
+                previous = pos;
+                pos = pos->next;
+            }
+
+        }
+    }
+}
