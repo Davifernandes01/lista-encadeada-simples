@@ -238,7 +238,7 @@ void LinkedList_print(const LinkedList *list){
  * 'end' da nossa lista para apontar para o elemento anterios ao do 'pos', apos fazer isso, removemos o 'pos'
  * 
  * 
- * @param linkedlist, a lisat em si
+ * @param linkedlist, a lista em si
  * @param val valor que quero remover
  * @author davi fernandes
 */
@@ -284,5 +284,63 @@ void linkedList_remove(LinkedList *linkedlist, int val){
                 }
         }
         
+}
+
+
+/***
+ * 
+ * @brief faz a mesma coisa que a função anterios, remove os elementos da lista, porem aqui,
+ * criamos os ponteiros 'previous' que aponta para o null e o 'po' que aponta para o inicio da lista em si, primeiro.
+ * ao fazer isso começamos o while, aonde o mesmo se a lista não for nulo e se não estive achado o numero passado como paramentro
+ * os ponteiros criados avançam na lista, com ponteiros 'previous' apontando para o elemento anterior apontado pelo  ponteiro 'pos'
+ * 
+ * abaixo do while temos os teste de condicionais: se o 'pos' apenas nao for nulo, que dizer que achamos o valor passado pela função. nisso:
+ * 
+ * caso o numero seja o elemento final da lista, o ponteiro 'previous', passará a apontar para ele
+ * 
+ * caso o numero esteja no elemento começo da lista, o ponteiro 'pos', passara a apontar para o proximo elemento da lista
+ * 
+ * caso o numero esteja em qualquer lugar da lista(exceto no começo e no final), o ponteiro previos passara a apontar para o proximo
+ * elemento que o ponteiro 'pos' aponta.
+ * 
+ * apos isso o elemento que o 'pos' aponta, será apagado
+ * 
+ * @param linkedlist a lista em sim
+ * @param val o numero passado
+ * @author Davi fernandes
+ * 
+ * 
+ * */
+
+void linkedList_removeV2(LinkedList *linkedlist, int val){
+
+    if(!Is_empty_linkedlist(linkedlist)){
+
+            Node *previous = NULL;
+            Node *pos = linkedlist->begin;
+        
+        while(pos != NULL && pos->val != val){
+            previous = pos;
+            pos = pos->next;
+            
+        }
+
+        if(pos != NULL){
+
+            if(linkedlist->end == pos){
+                linkedlist->end = previous;
+            }
+
+            if(linkedlist->begin == pos){
+                linkedlist->begin = pos->next;
+            }else{
+                previous->next = pos->next;
+            }
+
+            free(pos);
+            
+        }
+
+    }
 }
 

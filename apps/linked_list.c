@@ -24,15 +24,15 @@ int main(){
     puts("");
 
 
-    linkedList_remove(list,10);
+    linkedList_removeV2(list,10);
     LinkedList_print(list);
      puts("");
 
-   linkedList_remove(list,4);
+   linkedList_removeV2(list,4);
     LinkedList_print(list);
 
     puts("");
-    linkedList_remove(list,7);
+    linkedList_removeV2(list,7);
     LinkedList_print(list);
 
 

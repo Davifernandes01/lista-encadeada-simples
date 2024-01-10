@@ -14,10 +14,11 @@ void add_last(LinkedList *LinkedList, int val);
 void LinkedList_print(const LinkedList *list);
 bool Is_empty_linkedlist(const LinkedList *linkedlist);
 void linkedList_remove(LinkedList *linkedlist, int val);
+void linkedList_removeV2(LinkedList *linkedList, int val);
 
 
 /**funcoes do nó*/
-Node  *Node_create(int val);
+Node *Node_create(int val);
 
 
 #endif  
