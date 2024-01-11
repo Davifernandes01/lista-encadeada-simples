@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <stddef.h>
 
 
 
@@ -23,7 +24,8 @@ typedef struct _node
 typedef struct _linkedList
 {
   Node *begin;
-  Node *end
+  Node *end;
+  size_t size;
     } LinkedList;
 
 
@@ -34,7 +36,7 @@ typedef struct _linkedList
 */
 bool Is_empty_linkedlist(const LinkedList *linkedlist){
 
-    return (linkedlist->begin == NULL && linkedlist->end ==NULL);
+    return linkedlist->size ==0;
 }
 
 
@@ -67,6 +69,7 @@ LinkedList *LinkedList_create(){
 
     linkedList->begin = NULL;
     linkedList->end = NULL;
+    linkedList->size = 0;
 
     return linkedList;
 
@@ -122,6 +125,7 @@ void add_first(LinkedList *linkedlist, int val){
     }
 
     linkedlist->begin = node;
+    linkedlist->size++;
 }
 
 
@@ -149,6 +153,7 @@ void add_last_slow(LinkedList *linkedList, int val){
     if(Is_empty_linkedlist(linkedList)){
         
         linkedList->begin = nodeC;
+       
     }else{
 
         Node *node = linkedList->begin;
@@ -158,8 +163,9 @@ void add_last_slow(LinkedList *linkedList, int val){
         }
 
         node->next = nodeC;
-
     }
+
+     linkedList->size++;
 }
 
 
@@ -194,6 +200,8 @@ void add_last(LinkedList *linkedList, int val){
         linkedList->end->next = node;
         linkedList->end = linkedList->end->next;
     }
+
+    linkedList->size++;
 
 }
 
@@ -290,6 +298,7 @@ void linkedList_remove(LinkedList *linkedlist, int val){
                 }
                 linkedlist->begin = linkedlist->begin->next;
                 free(node);
+                linkedlist->size--;
                 
             }else
                 {
@@ -311,6 +320,7 @@ void linkedList_remove(LinkedList *linkedlist, int val){
                         }
 
                         free(pos);
+                        linkedlist->size--;
 
                     }   
                 }
@@ -369,6 +379,7 @@ void linkedList_removeV2(LinkedList *linkedlist, int val){
             }
 
             free(pos);
+            linkedlist->size--;
             
         }
 
@@ -410,4 +421,82 @@ void linkedList_removeAll(LinkedList *linkedlist, int val){
 
         }
     }
+}
+
+
+/**
+ * @brief retorna o tamanho da lista, verifica se a lista esta vazia
+ * @author davi fernandes
+*/
+size_t linkedList_size(const LinkedList *linkedlist){
+
+         if(Is_empty_linkedlist(linkedlist)){
+        fprintf(stderr, "ERROR in 'linkedlist_first_val'");
+        fprintf(stderr, "list is empty\n");
+        exit(EXIT_FAILURE);
+    }else{
+        return linkedlist->size;
+    }
+}    
+
+/**
+ * 
+ * @brief retorna o primeiro valor da lista encadeada, verifica se a lista esta vazia
+ * @author davi fernandes
+*/
+int linkedList_fisrt_val(const LinkedList *linkedlist){
+
+    if(Is_empty_linkedlist(linkedlist)){
+        fprintf(stderr, "ERROR in 'linkedlist_first_val'");
+        fprintf(stderr, "list is empty\n");
+        exit(EXIT_FAILURE);
+    }else{
+        return linkedlist->begin->val;
+    }
+
+    
+}
+
+int linkedList_last_val(const LinkedList *linkedlist){
+    if(Is_empty_linkedlist(linkedlist)){
+        fprintf(stderr, "ERROR in 'linkedlist_last_val'");
+        fprintf(stderr, "list is empty\n");
+        exit(EXIT_FAILURE);
+    }else{
+        return linkedlist->end->val;
+    }
+
+    
+}
+
+/***
+ * 
+ * @brief retorna o valor da lista, dado um dado index, verifica se a lista esta vazio ou se o index esta incorreto.
+ * @author davi fernandes
+*/
+int linkedList_get(const LinkedList *linkedlist, int index){
+    
+    if(Is_empty_linkedlist(linkedlist)){
+        fprintf(stderr, "ERROR in 'linkedlist_get'");
+        fprintf(stderr, "list is empty\n");
+        exit(EXIT_FAILURE);
+    }else if(index < 0 || index >= linkedlist->size){
+         fprintf(stderr, "ERROR in 'linkedlist_get'");
+        fprintf(stderr, "index error\n");
+        exit(EXIT_FAILURE);
+    }else{
+
+        int i = 0;
+        Node *node = linkedlist->begin;
+
+        while (i != index)
+        {
+            node = node->next;
+            i++;
+        }
+        
+        return node->val;
+    }
+
+
 }
