@@ -32,9 +32,20 @@ int main(){
 
   //linkedList_destroy(&list);
   
-  linkedList_copy_first(list2, list);
+  add_first(list2, 1);
+  add_first(list2, 4);
+  add_first(list2, 6);
+  add_first(list2, 7);
+  add_first(list2, 3);
+  add_first(list2, 8);
+  add_first(list2, 9);
 
    LinkedList_print(list2);
+    puts("");
+
+  linkedList_concatenate(list, list2);
+
+  LinkedList_print(list);
 
   
   

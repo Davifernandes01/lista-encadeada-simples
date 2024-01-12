@@ -250,9 +250,12 @@ void LinkedList_print(const LinkedList *list){
     Node *node = list->begin;
 
     while(node != NULL){
-         printf("%d ->\n", node->val);
+         printf("%d ->", node->val);
+         
          node =node->next;
     }
+
+    puts("");
 
 }
 
@@ -589,4 +592,24 @@ void linkedList_copy_last(LinkedList *linkedlistCopy, LinkedList *linkedlist){
                 
         }   
 }
+}
+
+/**
+ * 
+ * @brief funcao para concatenar 2 listas
+ * @param linkdlist_1 irá receber os elemento do @param linkedlist_2
+ * para fazer isso, apontamos o atributo 'next' da  @param linkdlist_1 que estava apontando para o null (final da lista)
+ * para o começo da lista do @param linkedlist_2
+ * 
+ * @author Davi fernandes
+*/
+void linkedList_concatenate(LinkedList *linkedlist_1, LinkedList *linkedlist_2){
+
+      if(!Is_empty_linkedlist(linkedlist_1)){
+            if (!Is_empty_linkedlist(linkedlist_2))
+            {
+                 linkedlist_1->end->next = linkedlist_2->begin;
+            }
+                  
+      }
 }

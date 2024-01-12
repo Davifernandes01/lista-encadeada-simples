@@ -25,6 +25,7 @@ int linkedList_get(const LinkedList *linkedlist, int index);
 void linkedList_reverse(LinkedList *linkedList);
 void linkedList_copy_first(LinkedList *linkedlistCopy, LinkedList *linkedlist);
 void linkedList_copy_last(LinkedList *linkedlistCopy, LinkedList *linkedlist);
+void linkedList_concatenate(LinkedList *linkedlist_1, LinkedList *linkedlist_2);
 
 
 
@@ -36,7 +37,7 @@ Node *Node_create(int val);
  * funcao a fazer:
  * 
  * inverter a lista (feito)
- * copiar a lista
+ * copiar a lista (feito)
  * concatenar 2 listas
  * ordenar a lista
  * inserção ordenada
