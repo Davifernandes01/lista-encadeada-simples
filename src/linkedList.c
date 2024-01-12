@@ -249,7 +249,7 @@ void LinkedList_print(const LinkedList *list){
     Node *node = list->begin;
 
     while(node != NULL){
-         printf("%d\n", node->val);
+         printf("%d ->", node->val);
          node =node->next;
     }
 
@@ -398,8 +398,7 @@ void linkedList_removeAll(LinkedList *linkedlist, int val){
         Node *pos = linkedlist->begin;
 
         while(pos != NULL){
-
-            if(pos->val == val){
+           if(pos->val == val){
 
                 if(linkedlist->begin == pos){
                     linkedlist->begin = pos->next;
@@ -411,15 +410,12 @@ void linkedList_removeAll(LinkedList *linkedlist, int val){
 
                     previous->next = pos->next;
                 }
-
-                free(pos);
-            
+                free(pos);           
             }else{
                 previous = pos;
                 pos = pos->next;
             }
-
-        }
+       }
     }
 }
 
@@ -493,9 +489,58 @@ int linkedList_get(const LinkedList *linkedlist, int index){
         {
             node = node->next;
             i++;
-        }
-        
+        }        
         return node->val;
+    }
+}
+
+/**
+ * 
+ *  @brief funcao feita para reverter a ordem da lista encadeada
+ *  primeiro verificasse se a lista não esta vazio, apos conferir isso, criamos 3 ponteiros:
+ *  2 apontando para o NULL ('next' e 'previous')
+ *  e 1 apontando para o começo da lista ('node')
+ * feito isso, iniciamos o while(enquando a lista não for nulo(não chegou no ultimo elemento),os ponteiros passarão por cada 
+ * elemento da lista)
+ * 
+ * os ponteiros funcionaram assim:
+ * a cada passagem do while, o ponteiro 'next' apontará para o proximo elemento que o ponteiro 'node' aponta
+ * o ATRIBUTO next do ponteiro node, apontará pra o ponteiro 'previous'
+ * apos isso, o ponteiro 'previous' apontará para o ponteiro 'node'
+ * em seguida, meu ponteiro 'node' apontará para o elemento 'next'
+ * 
+ * seguindo isso ficara assim: sempre o ponteiro 'next' ficará apontando para o mesmo elemento que 'node', enquanto 'previous'
+ * apontará para o elemento anterior em que os outros ponteiros apontam.
+ * 
+ * no final do while, todos os ponteiros menciondados irá passar por todos os elementos da lista,
+ * porem os ponteiro next e node, apontaram para o NULO, enquando o ponteiro previous, apontará para
+ * o ultimo elemento da lista
+ * 
+ * apos isso, é so fazer o começo da lista, apontar para o ponteiro previuos(que esta apontando para o ultimo elemnto da lista),
+ * assim invertemos ela.
+ * 
+ * @author Davi fernandes
+ * 
+*/
+
+void linkedList_reverse(LinkedList *linkedlist){
+
+    if(!Is_empty_linkedlist(linkedlist)){
+
+        Node *previuos = NULL;
+        Node *next = NULL;
+        Node *node = linkedlist->begin;
+
+        while (node != NULL)
+        {      
+            next = node->next; // proximo aponta para o proximo elemento do atual
+            node->next = previuos; //ponteiro do atual vai apontar para o anterior (inverte)
+            previuos =node;  //o anterior vira atual;
+            node = next; //atual vira o proximo;
+
+        }
+        linkedlist->begin = previuos;
+
     }
 
 

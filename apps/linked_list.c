@@ -31,12 +31,9 @@ int main(){
 
   //linkedList_destroy(&list);
   
-  printf("size ->: %lu\n", linkedList_size(list));
+  linkedList_reverse(list);
 
-  printf("primeiro: %d\n", linkedList_fisrt_val(list));
-  printf("ultimo: %d\n", linkedList_last_val(list));
-  printf("numero do index %d\n", linkedList_get(list, 0));
-
+  LinkedList_print(list);
   
     return 0;
 
