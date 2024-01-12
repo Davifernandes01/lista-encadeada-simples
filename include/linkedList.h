@@ -23,6 +23,8 @@ int linkedList_fisrt_val(const LinkedList *linkedlist);
 int linkedList_last_val(const LinkedList *linkedlist);
 int linkedList_get(const LinkedList *linkedlist, int index);
 void linkedList_reverse(LinkedList *linkedList);
+void linkedList_copy_first(LinkedList *linkedlistCopy, LinkedList *linkedlist);
+void linkedList_copy_last(LinkedList *linkedlistCopy, LinkedList *linkedlist);
 
 
 

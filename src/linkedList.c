@@ -228,6 +228,7 @@ void linkedList_destroy(LinkedList **linkedList){
     {
         previous = pos;
         pos = pos->next;
+       
 
         free(previous);
 
@@ -249,7 +250,7 @@ void LinkedList_print(const LinkedList *list){
     Node *node = list->begin;
 
     while(node != NULL){
-         printf("%d ->", node->val);
+         printf("%d ->\n", node->val);
          node =node->next;
     }
 
@@ -540,8 +541,52 @@ void linkedList_reverse(LinkedList *linkedlist){
 
         }
         linkedlist->begin = previuos;
+   }
+}
 
+/**
+ * @brief funcao criada para copiar os elementos de uma lista, para a outra lista.
+ * essa funcao por exemplo, começa a copiar os elementos da lista e colaca em outra lista, começando do começa dessa nova lista.
+ * 
+ * @param linkedlistCopy a lista que ira receber os elementos
+ * @param linkedlist o lista que irá passar os elementos.
+ * @author Davi fernandes
+*/
+void linkedList_copy_first(LinkedList *linkedListCopy, LinkedList *linkedlist){
+
+        
+    if(!Is_empty_linkedlist(linkedlist)){
+        Node *node = linkedlist->begin;
+        while (node != NULL)
+        {
+
+            add_first(linkedListCopy, node->val);
+            node = node->next;
+                
+        }
     }
 
+}
 
+
+/**
+ * @brief funcao criada para copiar os elementos de uma lista, para a outra lista.
+ * essa funcao por exemplo, começa a copiar os elementos da lista e colaca em outra lista, começando do final dessa nova lista.
+ * 
+ * @param linkedlistCopy a lista que ira receber os elementos
+ * @param linkedlist o lista que irá passar os elementos.
+ * @author Davi fernandes
+*/
+void linkedList_copy_last(LinkedList *linkedlistCopy, LinkedList *linkedlist){
+
+        if(!Is_empty_linkedlist(linkedlist)){
+        Node *node = linkedlist->begin;
+        while (node != NULL)
+        {
+
+            add_last(linkedlistCopy, node->val);
+            node = node->next;
+                
+        }   
+}
 }

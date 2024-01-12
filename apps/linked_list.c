@@ -7,6 +7,7 @@
 int main(){
 
     LinkedList *list = LinkedList_create();
+    LinkedList *list2 = LinkedList_create();
 
     // add_first(list, 80);
     // add_first(list,90);
@@ -24,16 +25,18 @@ int main(){
     add_last(list, 10); //5
     add_last(list,50); //6
     add_last(list, 7); //7
-    add_first(list, 56);
+    add_last(list, 56);
 
     LinkedList_print(list);
     puts("");
 
   //linkedList_destroy(&list);
   
-  linkedList_reverse(list);
+  linkedList_copy_first(list2, list);
 
-  LinkedList_print(list);
+   LinkedList_print(list2);
+
+  
   
     return 0;
 
