@@ -26,9 +26,13 @@ int main(){
     add_last(list,50); //6
     add_last(list, 7); //7
     add_last(list, 56);
+    add_last(list,45);
+    add_last(list,5);
+    add_last(list,10);
+    add_last(list,5);
+    add_last(list,7);
 
-    LinkedList_print(list);
-    puts("");
+  
 
   //linkedList_destroy(&list);
   
@@ -40,10 +44,11 @@ int main(){
   add_first(list2, 8);
   add_first(list2, 9);
 
-   LinkedList_print(list2);
-    puts("");
+   LinkedList_print(list);
+   
 
-  linkedList_concatenate(list, list2);
+
+   linkedList_remove_repetitions(list,10);
 
   LinkedList_print(list);
 

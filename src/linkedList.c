@@ -94,24 +94,7 @@ LinkedList *LinkedList_create(){
         node->next = linkedlist->begin;
         linkedlist->begin = node;
 
- *porem para fim ditaticos, deixei ele mais legivel
 */
-/*void add_first(LinkedList *linkedlist, int val){
-
-   
-    if(linkedlist->begin == NULL){
-        Node *node = Node_create(val);
-
-        linkedlist->begin = node;
-    }else{
-
-        Node *node = Node_create(val);
-        node->next = linkedlist->begin;
-        linkedlist->begin = node;
-    }
-
-};*/
-
 void add_first(LinkedList *linkedlist, int val){
 
     Node *node = Node_create(val);
@@ -392,34 +375,32 @@ void linkedList_removeV2(LinkedList *linkedlist, int val){
 
 
 /**
- * @attention AINDA NAO FUNCIONAAAAAAAAAAAAAA
+ * @attention FUNCIONAAAAAAAAAAAAAA
 */
-void linkedList_removeAll(LinkedList *linkedlist, int val){
+void linkedList_remove_repetitions(LinkedList *linkedlist, int val){
 
     if(!Is_empty_linkedlist(linkedlist)){
+            Node *node = linkedlist->begin; //começo da lista
+            Node *previous = NULL; // anterior.
+            Node *aux;
 
-        Node *previous = NULL;
-        Node *pos = linkedlist->begin;
+            while (node != NULL) //verifica se a lista nao esta vazio(null), caso não esteja:
+            {
+                previous = node; //ponteiro 'previous' aponta para o começo da lista
 
-        while(pos != NULL){
-           if(pos->val == val){
-
-                if(linkedlist->begin == pos){
-                    linkedlist->begin = pos->next;
-                }
-
-                if(linkedlist->end == pos){
-                    linkedlist->end = previous;
-                }else{
-
-                    previous->next = pos->next;
-                }
-                free(pos);           
-            }else{
-                previous = pos;
-                pos = pos->next;
-            }
-       }
+                    while (previous->next != NULL) //verifica-se se o proximo valor não é nulo, caso não for:
+                    {
+                        if(node->val == previous->next->val){ //verifica se o valor do node atual é igual ao valor do proximo elemento de 'previous' anterior, caso for:
+                            aux = previous->next; //guarda o valor do proximo elemento de 'previous'
+                            previous->next = previous->next->next; //o atributo 'next' do ponteiro 'previous' vai receber o vaor do proximo do proximo elemento
+                            free(aux); //apagará o valor de aux na memoria
+                        }else{
+                            previous = previous->next; //caso nao ocorra nada, passara para o proximo valor;
+                        }
+                    }
+                    
+                node = node->next; //passa para o proximo elemento da lista
+            }       
     }
 }
 
@@ -430,7 +411,7 @@ void linkedList_removeAll(LinkedList *linkedlist, int val){
 */
 size_t linkedList_size(const LinkedList *linkedlist){
 
-         if(Is_empty_linkedlist(linkedlist)){
+    if(Is_empty_linkedlist(linkedlist)){
         fprintf(stderr, "ERROR in 'linkedlist_first_val'");
         fprintf(stderr, "list is empty\n");
         exit(EXIT_FAILURE);
@@ -526,7 +507,6 @@ int linkedList_get(const LinkedList *linkedlist, int index){
  * @author Davi fernandes
  * 
 */
-
 void linkedList_reverse(LinkedList *linkedlist){
 
     if(!Is_empty_linkedlist(linkedlist)){
@@ -571,7 +551,6 @@ void linkedList_copy_first(LinkedList *linkedListCopy, LinkedList *linkedlist){
 
 }
 
-
 /**
  * @brief funcao criada para copiar os elementos de uma lista, para a outra lista.
  * essa funcao por exemplo, começa a copiar os elementos da lista e colaca em outra lista, começando do final dessa nova lista.
@@ -610,6 +589,41 @@ void linkedList_concatenate(LinkedList *linkedlist_1, LinkedList *linkedlist_2){
             {
                  linkedlist_1->end->next = linkedlist_2->begin;
             }
+             
                   
       }
+}
+
+/**
+ * @author Davi fernandes
+*/
+void linkedList_bubble_sort(LinkedList *linkdlist){
+
+    int swapped ; // trocado
+
+    Node *node1 ;
+    Node *node = NULL;
+
+    do
+    {
+        swapped = 0; //inicializado com 0 (false)
+        node1 = linkdlist->begin; //apontando para o inicio da lista
+
+        while(node1->next != node){ //enquanto for diferente de nulo...
+            if(node1->val > node1->next->val){ //verifica se o nó atual é maior que o proximo nó, caso for:
+
+                int temp = node1->val; //guarda o valor atual do nó
+                node1->val = node1->next->val; // o no atual recebe o valor do proximo nó
+                node1->next->val = temp; // e o proximo nó, recebe o valor do no atual
+                swapped = 1; // mostra que teve uma troca de valores entre os nós(true)
+            }
+
+            node1 = node1->next; //passa para o proximo nó
+        }
+
+        node = node1; //aponta para o nó anterior que foi trocado
+
+    } while (swapped); //verifica se a variavel 'swapped' é igual a 1, se for, o loop continua, caso seja igual a zero, o loop vai parar
+
+    
 }

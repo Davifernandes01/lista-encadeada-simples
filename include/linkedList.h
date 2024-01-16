@@ -16,7 +16,7 @@ void LinkedList_print(const LinkedList *list);
 bool Is_empty_linkedlist(const LinkedList *linkedlist);
 void linkedList_remove(LinkedList *linkedlist, int val);
 void linkedList_removeV2(LinkedList *linkedList, int val);
-void linkedList_removeAll(LinkedList *linkedlist, int val); // ainda não funciona
+void linkedList_remove_repetitions(LinkedList *linkedlist, int val); // ainda não funciona
 void linkedList_destroy(LinkedList **linkedlist);
 size_t linkedList_size(const LinkedList *linkedlist);
 int linkedList_fisrt_val(const LinkedList *linkedlist);
@@ -26,6 +26,7 @@ void linkedList_reverse(LinkedList *linkedList);
 void linkedList_copy_first(LinkedList *linkedlistCopy, LinkedList *linkedlist);
 void linkedList_copy_last(LinkedList *linkedlistCopy, LinkedList *linkedlist);
 void linkedList_concatenate(LinkedList *linkedlist_1, LinkedList *linkedlist_2);
+void linkedList_bubble_sort(LinkedList *linkedlist);
 
 
 
@@ -38,7 +39,7 @@ Node *Node_create(int val);
  * 
  * inverter a lista (feito)
  * copiar a lista (feito)
- * concatenar 2 listas
+ * concatenar 2 listas (feitp)
  * ordenar a lista
  * inserção ordenada
 */
